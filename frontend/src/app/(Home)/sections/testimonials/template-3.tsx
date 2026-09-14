@@ -13,17 +13,19 @@ export function TestimonialsTemplate3() {
   const active = TESTIMONIALS[index];
 
   return (
-    <section className="border-b-2 border-foreground bg-background">
-      <FadeIn className="mx-auto max-w-300 border-x-2 border-foreground px-6 py-16 text-center md:px-8 lg:px-12 lg:py-24">
-        <h2 className="text-h1 text-foreground">What People Are Saying</h2>
+    <section className="bg-white py-20 lg:py-28">
+      <FadeIn className="mx-auto max-w-300 px-6 text-center md:px-8 lg:px-12">
+        <h2 className="text-h1 font-normal text-foreground">
+          What people are saying
+        </h2>
         <p className="mx-auto mt-4 max-w-2xl text-body-lg text-muted-foreground">
           Real feedback from the people and organizations we work with.
         </p>
 
-        <div className="mx-auto mt-12 flex max-w-2xl flex-col items-center gap-6 border-2 border-foreground p-8 sm:p-10">
+        <div className="mx-auto mt-14 flex max-w-2xl flex-col items-center gap-6">
           <p
             key={index}
-            className="animate-in text-body-lg text-foreground fade-in duration-500"
+            className="animate-in text-body-lg font-normal text-foreground fade-in duration-500"
           >
             &ldquo;{active.quote}&rdquo;
           </p>
@@ -32,10 +34,10 @@ export function TestimonialsTemplate3() {
             <Image
               src={active.photo}
               alt={active.name}
-              className="h-11 w-11 shrink-0 border-2 border-foreground object-cover grayscale"
+              className="h-11 w-11 shrink-0 rounded-full object-cover"
             />
             <div className="flex flex-col text-left">
-              <span className="text-sm font-bold text-foreground">
+              <span className="text-sm font-medium text-foreground">
                 {active.name}
               </span>
               <span className="text-sm text-muted-foreground">
@@ -52,8 +54,8 @@ export function TestimonialsTemplate3() {
                 onClick={() => setIndex(i)}
                 aria-label={`Show testimonial from ${testimonial.name}`}
                 className={cn(
-                  "h-1.5 w-6 cursor-pointer transition-colors",
-                  i === index ? "bg-foreground" : "bg-border",
+                  "h-1.5 w-1.5 cursor-pointer rounded-full transition-all",
+                  i === index ? "w-6 bg-foreground" : "bg-border",
                 )}
               />
             ))}

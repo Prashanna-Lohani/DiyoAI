@@ -15,10 +15,10 @@ import {
 
 export function FooterTemplate3() {
   return (
-    <footer className="border-t-2 border-foreground bg-background">
-      <div className="mx-auto max-w-360 border-x-2 border-foreground">
-        <div className="grid grid-cols-1 divide-y-2 divide-foreground md:grid-cols-3 md:divide-x-2 md:divide-y-0">
-          <div className="flex flex-col gap-4 p-8 md:p-12">
+    <footer className="border-t border-border/60 bg-white">
+      <div className="mx-auto max-w-360 px-6 py-20 md:px-8 lg:px-12">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 lg:gap-16">
+          <div className="flex flex-col gap-4">
             <Link href="/" className="flex items-center">
               <Image src={DiyoLogo} alt="Diyo.ai" className="h-9 w-auto" />
             </Link>
@@ -28,10 +28,10 @@ export function FooterTemplate3() {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-12 p-8 sm:gap-16 md:p-12">
+          <div className="flex flex-wrap gap-12 sm:gap-16">
             {FOOTER_LINK_GROUPS.map((group) => (
               <div key={group.title} className="flex flex-col gap-3">
-                <span className="text-xs font-bold tracking-widest text-foreground uppercase">
+                <span className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
                   {group.title}
                 </span>
                 <ul className="flex flex-col gap-2.5">
@@ -45,7 +45,7 @@ export function FooterTemplate3() {
                         {link.badge && (
                           <Badge
                             variant="default"
-                            className="rounded-none px-1.5 text-[10px] tracking-wide uppercase"
+                            className="rounded-full px-1.5 text-[10px] tracking-wide uppercase"
                           >
                             {link.badge}
                           </Badge>
@@ -58,8 +58,8 @@ export function FooterTemplate3() {
             ))}
           </div>
 
-          <div className="flex flex-col gap-3 p-8 md:p-12">
-            <span className="text-xs font-bold tracking-widest text-foreground uppercase">
+          <div className="flex flex-col gap-3">
+            <span className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
               Contact Us
             </span>
             <p className="text-sm text-muted-foreground">
@@ -67,27 +67,24 @@ export function FooterTemplate3() {
               you.
             </p>
             <form
-              className="flex w-full max-w-sm gap-0 border-2 border-foreground"
+              className="flex w-full max-w-sm gap-2"
               onSubmit={(e) => e.preventDefault()}
             >
               <Input
                 type="email"
                 placeholder="you@example.com"
                 aria-label="Email address"
-                className="rounded-none border-0"
+                className="rounded-full"
                 required
               />
-              <Button
-                type="submit"
-                className="shrink-0 rounded-none border-l-2 border-foreground bg-foreground px-5 text-background hover:bg-foreground/85"
-              >
+              <Button type="submit" className="shrink-0 rounded-full px-5">
                 Submit
               </Button>
             </form>
           </div>
         </div>
 
-        <div className="flex flex-col-reverse items-center justify-between gap-6 border-t-2 border-foreground px-8 py-8 sm:flex-row md:px-12">
+        <div className="mt-16 flex flex-col-reverse items-center justify-between gap-6 border-t border-border/60 pt-8 sm:flex-row">
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
             <span>
               © {new Date().getFullYear()} Diyo, Inc. All rights reserved.

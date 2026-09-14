@@ -15,42 +15,37 @@ export function NavbarTemplate3() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b-2 border-foreground bg-background">
-      <div className="mx-auto grid h-18 max-w-360 grid-cols-[auto_1fr_auto] items-stretch divide-x-2 divide-foreground border-x-2 border-foreground px-0">
-        <Link
-          href="/"
-          className="flex items-center px-6 py-2 md:px-8"
-        >
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
+      <div className="mx-auto flex h-18 max-w-360 items-center justify-between px-6 md:px-8 lg:px-12">
+        <Link href="/" className="flex items-center">
           <Image src={DiyoLogo} alt="Diyo.ai" className="h-8 w-auto" priority />
         </Link>
 
-        <nav className="hidden items-stretch justify-center divide-x-2 divide-foreground lg:flex">
+        <nav className="hidden items-center gap-8 lg:flex">
           {NAV_LINKS.map((link) => (
-            <div key={link.href} className="group relative flex">
+            <div key={link.href} className="group relative">
               <Link
                 href={link.href}
-                className="flex items-center gap-1 px-5 text-xs font-bold tracking-widest text-foreground uppercase transition-colors hover:bg-foreground hover:text-background"
+                className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 {link.label}
-                {link.items && <FiChevronDown size={12} />}
+                {link.items && <FiChevronDown size={13} />}
               </Link>
               {link.items && (
-                <div className="invisible absolute top-full left-0 z-10 w-72 border-2 border-t-0 border-foreground bg-background opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-                  {link.items.map((item, i) => {
+                <div className="invisible absolute left-1/2 z-10 mt-4 w-72 -translate-x-1/2 rounded-2xl border border-border/60 bg-white p-2 opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:mt-3 group-hover:opacity-100">
+                  {link.items.map((item) => {
                     const Icon = item.icon;
                     return (
                       <Link
                         key={item.href}
                         href={item.href}
-                        className={`flex items-start gap-3 p-3 hover:bg-muted ${
-                          i > 0 ? "border-t-2 border-foreground" : ""
-                        }`}
+                        className="flex items-start gap-3 rounded-xl p-2.5 hover:bg-muted/60"
                       >
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center border-2 border-foreground text-foreground">
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted text-foreground">
                           <Icon size={14} />
                         </span>
                         <span className="flex flex-col gap-0.5 text-left">
-                          <span className="text-sm font-bold text-foreground">
+                          <span className="text-sm font-medium text-foreground">
                             {item.label}
                           </span>
                           <span className="text-xs text-muted-foreground">
@@ -66,25 +61,21 @@ export function NavbarTemplate3() {
           ))}
         </nav>
 
-        <div className="hidden items-stretch divide-x-2 divide-foreground lg:flex">
-          <Button
-            variant="ghost"
-            className="h-full rounded-none px-6 text-xs font-bold tracking-widest uppercase"
+        <div className="hidden items-center gap-4 lg:flex">
+          <Link
+            href="#"
+            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             Login
-          </Button>
-          <Button className="h-full rounded-none bg-foreground px-6 text-xs font-bold tracking-widest text-background uppercase hover:bg-foreground/85">
-            Get Started
-          </Button>
-          <div className="flex items-center px-4">
-            <TemplateSwitcher />
-          </div>
+          </Link>
+          <Button className="rounded-full px-5 shadow-sm">Get Started</Button>
+          <TemplateSwitcher />
         </div>
 
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
-          className="flex items-center justify-center px-6 text-foreground lg:hidden"
+          className="text-foreground lg:hidden"
           aria-label="Toggle menu"
           aria-expanded={isOpen}
         >
@@ -93,25 +84,23 @@ export function NavbarTemplate3() {
       </div>
 
       {isOpen && (
-        <nav className="flex flex-col divide-y-2 divide-foreground border-x-2 border-b-2 border-foreground lg:hidden">
+        <nav className="flex flex-col gap-1 border-t border-border/60 px-6 py-4 lg:hidden">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="flex items-center justify-between px-6 py-3 text-xs font-bold tracking-widest text-foreground uppercase hover:bg-muted"
+              className="flex items-center justify-between rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-muted/60 hover:text-foreground"
             >
               {link.label}
-              {link.items && <FiChevronDown size={14} />}
+              {link.items && <FiChevronDown size={15} />}
             </Link>
           ))}
-          <div className="flex flex-col gap-2 p-4">
-            <Button variant="ghost" className="w-full rounded-none">
+          <div className="mt-2 flex flex-col gap-2">
+            <Button variant="outline" className="w-full rounded-full">
               Login
             </Button>
-            <Button className="w-full rounded-none bg-foreground text-background hover:bg-foreground/85">
-              Get Started
-            </Button>
+            <Button className="w-full rounded-full">Get Started</Button>
             <TemplateSwitcher />
           </div>
         </nav>

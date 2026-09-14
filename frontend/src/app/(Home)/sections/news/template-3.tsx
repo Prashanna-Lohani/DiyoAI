@@ -8,15 +8,15 @@ import { NEWS_ARTICLES } from "@/utils/constants";
 
 export function NewsTemplate3() {
   return (
-    <section className="border-b-2 border-foreground bg-background">
-      <FadeIn className="mx-auto max-w-300 border-x-2 border-foreground px-6 py-16 md:px-8 lg:px-12 lg:py-24">
-        <div className="flex flex-col gap-12 lg:flex-row lg:gap-0">
-          <div className="flex flex-col items-start gap-4 border-2 border-r-0 border-foreground p-8 text-left lg:w-1/3">
-            <span className="text-xs font-bold tracking-widest text-foreground uppercase">
+    <section className="bg-white py-20 lg:py-28">
+      <FadeIn className="mx-auto max-w-300 px-6 md:px-8 lg:px-12">
+        <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
+          <div className="flex flex-col items-start gap-4 text-left lg:w-1/3">
+            <span className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
               In the Press
             </span>
-            <h2 className="text-h1 text-foreground">
-              Localizing AI: Diyo.ai in the News
+            <h2 className="text-h1 font-normal text-foreground">
+              Localizing AI: Diyo.ai in the news
             </h2>
             <p className="text-body-lg text-muted-foreground">
               Breaking barriers, making AI work in local languages and
@@ -25,39 +25,37 @@ export function NewsTemplate3() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 divide-y-2 divide-foreground border-2 border-foreground sm:grid-cols-2 sm:divide-x-2 sm:divide-y-0 lg:w-2/3">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:w-2/3">
             {NEWS_ARTICLES.map((article, index) => (
               <div
                 key={`${article.href}-${index}`}
-                className="flex flex-col"
+                className="flex flex-col gap-4 rounded-2xl p-5 transition-colors hover:bg-muted/40"
               >
-                <div className="flex h-28 items-center justify-center border-b-2 border-foreground p-6">
+                <div className="flex h-24 items-center justify-center rounded-xl bg-muted/40 p-6">
                   <Image
                     src={article.logo}
                     alt={article.outlet}
-                    className="h-full w-full object-contain grayscale"
+                    className="h-full w-full object-contain"
                   />
                 </div>
-                <div className="flex flex-1 flex-col gap-4 p-5">
-                  <p className="line-clamp-2 text-sm font-semibold text-foreground">
-                    {article.title}
-                  </p>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="mt-auto w-fit gap-1 rounded-none border-2 border-foreground px-4"
-                    render={
-                      <Link
-                        href={article.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      />
-                    }
-                  >
-                    Read more
-                    <FiArrowRight size={14} />
-                  </Button>
-                </div>
+                <p className="line-clamp-2 text-sm font-medium text-foreground">
+                  {article.title}
+                </p>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="mt-auto w-fit gap-1 rounded-full px-4 hover:bg-white"
+                  render={
+                    <Link
+                      href={article.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    />
+                  }
+                >
+                  Read more
+                  <FiArrowRight size={14} />
+                </Button>
               </div>
             ))}
           </div>

@@ -22,15 +22,13 @@ function StatCell({
 }) {
   const display = useCounter(value, inView);
   return (
-    <div className="flex flex-col items-center gap-2 border-foreground p-6 text-center">
-      <span className="text-h1 text-foreground">
+    <div className="flex flex-col items-center gap-2 py-6 text-center">
+      <span className="text-h1 font-normal text-foreground">
         {prefix}
         {display.toFixed(decimals ?? 0)}
         {suffix}
       </span>
-      <span className="text-xs font-bold tracking-widest text-muted-foreground uppercase">
-        {label}
-      </span>
+      <span className="text-sm text-muted-foreground">{label}</span>
     </div>
   );
 }
@@ -39,17 +37,17 @@ export function MilestonesTemplate3() {
   const { ref, inView } = useInView<HTMLElement>();
 
   return (
-    <section ref={ref} className="border-b-2 border-foreground bg-background">
-      <FadeIn className="mx-auto max-w-360 border-x-2 border-foreground px-6 py-12 text-center md:px-8 lg:px-12">
-        <h2 className="text-h1 text-foreground">
-          Diyo&apos;s Milestones at a Glance
+    <section ref={ref} className="bg-white py-20 lg:py-28">
+      <FadeIn className="mx-auto max-w-360 px-6 text-center md:px-8 lg:px-12">
+        <h2 className="text-h1 font-normal text-foreground">
+          Diyo&apos;s milestones at a glance
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-body-lg text-muted-foreground">
           Our achievements and growth metrics showcase our impact in the AI and
           language technology landscape.
         </p>
 
-        <div className="mt-10 grid grid-cols-2 divide-x-2 divide-y-2 divide-foreground border-2 border-foreground sm:grid-cols-5 sm:divide-y-0">
+        <div className="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-5 sm:gap-0 sm:divide-x sm:divide-border/70">
           {MILESTONES.map((milestone) => (
             <StatCell
               key={milestone.label}
