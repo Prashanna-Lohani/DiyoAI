@@ -7,7 +7,7 @@ import { FadeIn } from '@/components/ui/fade-in';
 import { cn } from '@/lib/utils';
 import { TESTIMONIALS } from '@/utils/constants';
 
-export function Testimonials() {
+export function TestimonialsTemplate1() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {

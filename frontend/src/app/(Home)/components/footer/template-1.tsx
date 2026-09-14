@@ -13,7 +13,7 @@ import {
   SOCIAL_LINKS,
 } from '@/utils/constants';
 
-export function Footer() {
+export function FooterTemplate1() {
   return (
     <footer className='border-t border-border bg-white'>
       <div className='mx-auto max-w-360 px-6 py-16 md:px-8 lg:px-12'>

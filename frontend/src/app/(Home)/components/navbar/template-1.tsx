@@ -18,7 +18,9 @@ import {
 import { cn } from "@/lib/utils";
 import { NAV_LINKS } from "@/utils/constants";
 
-export function Navbar() {
+import { TemplateSwitcher } from "../template-switcher";
+
+export function NavbarTemplate1() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -124,6 +126,7 @@ export function Navbar() {
             Login
           </Button>
           <Button className='rounded-lg px-5'>Get Started</Button>
+          <TemplateSwitcher />
         </div>
 
         <button
@@ -164,6 +167,7 @@ export function Navbar() {
               Login
             </Button>
             <Button className='w-full rounded-lg px-5'>Get Started</Button>
+            <TemplateSwitcher />
           </div>
         </nav>
       )}

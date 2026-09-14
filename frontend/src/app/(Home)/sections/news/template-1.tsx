@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { FadeIn } from '@/components/ui/fade-in';
 import { NEWS_ARTICLES } from '@/utils/constants';
 
-export function News() {
+export function NewsTemplate1() {
   return (
     <section className='border-t border-border bg-white py-16 lg:py-24'>
       <FadeIn className='mx-auto max-w-300 px-6 md:px-8 lg:px-12'>

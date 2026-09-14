@@ -9,7 +9,7 @@ const MARQUEE_ITEMS = [
   ...AWARD_LOGOS.map((award) => ({ src: award.src, label: award.alt })),
 ];
 
-export function Collaborations() {
+export function CollaborationsTemplate1() {
   return (
     <section className='overflow-hidden border-t border-border bg-background py-16 lg:py-20'>
       <FadeIn className='mx-auto max-w-300 px-6 text-center md:px-8 lg:px-12'>

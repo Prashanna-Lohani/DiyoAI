@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { FadeIn } from '@/components/ui/fade-in';
 
-export function Hero() {
+export function HeroTemplate1() {
   return (
     <section
       id='hero'
