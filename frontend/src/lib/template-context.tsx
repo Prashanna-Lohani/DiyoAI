@@ -8,12 +8,13 @@ import {
   type ReactNode,
 } from "react";
 
-export type TemplateId = "1" | "2" | "3";
+export type TemplateId = "1" | "2" | "3" | "4";
 
 export const TEMPLATES: { id: TemplateId; label: string }[] = [
   { id: "1", label: "Dashboard 1" },
   { id: "2", label: "Dashboard 2" },
   { id: "3", label: "Dashboard 3" },
+  { id: "4", label: "Dashboard 4" },
 ];
 
 const STORAGE_KEY = "diyo-template";
@@ -31,7 +32,12 @@ export function TemplateProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (stored === "1" || stored === "2" || stored === "3") {
+      if (
+        stored === "1" ||
+        stored === "2" ||
+        stored === "3" ||
+        stored === "4"
+      ) {
         setTemplateState(stored);
       }
     } catch {

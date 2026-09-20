@@ -1,3 +1,8 @@
+"use client";
+
+import { useTemplate } from "@/lib/template-context";
+
+import { DashboardFour } from "./dashboard-4";
 import { Collaborations } from "./sections/collaborations";
 import { Hero } from "./sections/hero";
 import { Milestones } from "./sections/milestones";
@@ -6,6 +11,12 @@ import { Products } from "./sections/products";
 import { Testimonials } from "./sections/testimonials";
 
 export default function Home() {
+  const { template } = useTemplate();
+
+  if (template === "4") {
+    return <DashboardFour />;
+  }
+
   return (
     <>
       <Hero />
