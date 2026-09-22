@@ -10,12 +10,12 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 import { TemplateSwitcher } from "../../components/template-switcher";
-import { useDashboardFourLang } from "../../dashboard-4/lang-context";
+import { useDashboardFiveLang } from "../lang-context";
 import { CHAPTERS } from "../data/content";
 
 export function DashboardFiveNavbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { lang, setLang } = useDashboardFourLang();
+  const { lang, setLang } = useDashboardFiveLang();
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-white/85 backdrop-blur-xl">

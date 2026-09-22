@@ -19,7 +19,7 @@ function CaseStudy({
   return (
     <FadeIn
       className={cn(
-        "grid grid-cols-1 gap-8 rounded-2xl p-8 md:grid-cols-2 md:gap-12 md:p-10",
+        "grid grid-cols-1 gap-8 rounded-2xl p-8 transition-transform duration-300 hover:-translate-y-1 md:grid-cols-2 md:gap-12 md:p-10",
         dark && "bg-[#0c1b33] text-white",
         study.theme === "light" && "bg-muted/40",
         study.theme === "tint" && "bg-primary/8",

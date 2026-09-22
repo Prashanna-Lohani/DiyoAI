@@ -8,10 +8,10 @@ export function DashboardFiveChapterIndex() {
           <a
             key={chapter.href}
             href={chapter.href}
-            className="group flex items-center gap-4 py-7 pl-0 first:pl-0 sm:px-7 sm:first:pl-0"
+            className="group flex items-center gap-4 py-7 pl-0 transition-colors duration-200 first:pl-0 hover:bg-primary/5 sm:px-7 sm:first:pl-0"
           >
             <span className="min-w-0 flex-1">
-              <strong className="block text-h3 text-foreground">
+              <strong className="block text-h3 text-foreground transition-colors duration-200 group-hover:text-primary">
                 {chapter.title}
               </strong>
               <small className="mt-1 block text-sm text-muted-foreground">
