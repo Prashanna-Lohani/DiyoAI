@@ -10,7 +10,7 @@ import { Footer } from "./components/footer";
 export default function HomeLayout({ children }: { children: ReactNode }) {
   const { template } = useTemplate();
 
-  if (template === "4") {
+  if (template === "4" || template === "5") {
     return <>{children}</>;
   }
 

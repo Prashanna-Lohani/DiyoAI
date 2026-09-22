@@ -8,13 +8,14 @@ import {
   type ReactNode,
 } from "react";
 
-export type TemplateId = "1" | "2" | "3" | "4";
+export type TemplateId = "1" | "2" | "3" | "4" | "5";
 
 export const TEMPLATES: { id: TemplateId; label: string }[] = [
   { id: "1", label: "Dashboard 1" },
   { id: "2", label: "Dashboard 2" },
   { id: "3", label: "Dashboard 3" },
   { id: "4", label: "Dashboard 4" },
+  { id: "5", label: "Dashboard 5" },
 ];
 
 const STORAGE_KEY = "diyo-template";
@@ -36,7 +37,8 @@ export function TemplateProvider({ children }: { children: ReactNode }) {
         stored === "1" ||
         stored === "2" ||
         stored === "3" ||
-        stored === "4"
+        stored === "4" ||
+        stored === "5"
       ) {
         setTemplateState(stored);
       }
