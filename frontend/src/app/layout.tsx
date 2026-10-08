@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { Nunito, Geist_Mono } from "next/font/google";
+import { Lato, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
-
-import { TemplateProvider } from "@/lib/template-context";
 
 import "./globals.css";
 
-const nunito = Nunito({
+const lato = Lato({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "700", "900"],
 });
 
 const geistMono = Geist_Mono({
@@ -26,10 +24,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang='en'
-      className={`${nunito.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${lato.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className='min-h-full flex flex-col'>
-        <TemplateProvider>{children}</TemplateProvider>
+        {children}
       </body>
     </html>
   );

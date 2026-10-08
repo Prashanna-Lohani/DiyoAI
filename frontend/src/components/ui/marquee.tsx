@@ -18,7 +18,7 @@ function Marquee<T>({
   return (
     <div className={cn("overflow-hidden", className)}>
       <div
-        className="marquee-track flex w-max items-center gap-10"
+        className="marquee-track flex w-max items-center gap-10 pr-10"
         style={{ animationDuration: `${duration}s` }}
       >
         {items.map((item, index) => (
