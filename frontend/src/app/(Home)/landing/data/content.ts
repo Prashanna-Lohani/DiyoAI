@@ -95,7 +95,8 @@ export const CASE_STUDIES = [
     heading: "AI for accessible health information",
     description:
       "AI for accessible health information",
-    note: "Application focus: accessible health education",
+    linkLabel: "Explore Juna",
+    href: "https://safeabortion.diyo.ai",
   },
 ] as const;
 
