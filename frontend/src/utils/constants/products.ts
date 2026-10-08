@@ -31,7 +31,7 @@ export const PRODUCTS: Product[] = [
     name: 'Muna',
     headline: 'Muna handles your business, in Nepali.',
     description:
-      'From citizen services to document guidance, Muna answers instantly — in the language your users speak.',
+      'From citizen services to document guidance, Muna answers instantly, in the language your users speak.',
     icon: FiBriefcase,
     image: MunaImage,
     imageSide: 'right',

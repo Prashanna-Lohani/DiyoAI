@@ -15,7 +15,7 @@ export const CONTACT = {
   address: "Jwagal, Lalitpur",
 } as const;
 
-export const CLIENTS = ["Helmets Nepal", "TATA", "Yeti Airlines", "Herveda Botanicals"] as const;
+export const CLIENTS = ["TATA", "Yeti Airlines"] as const;
 export const PARTNERS = [
   "United Nations Development Programme",
   "Butwal Sub-Metropolitan City",

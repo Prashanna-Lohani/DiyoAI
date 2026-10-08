@@ -1,7 +1,5 @@
 import type { StaticImageData } from 'next/image';
 
-import HelmetsNepalLogo from '@/assets/images/helmetsnepal.png';
-import HervedaLogo from '@/assets/images/herveda.png';
 import MetroLogo from '@/assets/images/metro.png';
 import NtbLogo from '@/assets/images/ntb.png';
 import TataLogo from '@/assets/images/tata.png';
@@ -20,6 +18,4 @@ export const COLLABORATORS: Collaborator[] = [
   { src: UndpLogo, label: 'United Nations Development Programme' },
   { src: TataLogo, label: 'TATA' },
   { src: YetiLogo, label: 'Yeti Airlines' },
-  { src: HervedaLogo, label: 'Herveda Botanicals' },
-  { src: HelmetsNepalLogo, label: 'Helmets Nepal' },
 ];

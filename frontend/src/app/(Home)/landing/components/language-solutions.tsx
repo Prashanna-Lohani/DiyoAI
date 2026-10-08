@@ -1,9 +1,19 @@
 import Link from "next/link";
+import {
+  FiArrowUpRight,
+  FiCpu,
+  FiFlag,
+  FiGlobe,
+  FiLayout,
+  FiMessageCircle,
+  FiMessageSquare,
+  FiPhoneCall,
+} from "react-icons/fi";
 
 import { FadeIn } from "@/components/ui/fade-in";
 import { cn } from "@/lib/utils";
 
-import { VoiceBars } from "./voice-bars";
+import { ConversationalAIDemo } from "./conversational-ai-demo";
 
 import {
   AGENT_FLOW,
@@ -11,6 +21,9 @@ import {
   CASE_STUDIES,
   SOLUTIONS_OVERVIEW,
 } from "../data/content";
+
+const AGENT_ICONS = [FiGlobe, FiCpu, FiMessageCircle, FiFlag];
+const SOLUTION_ICONS = [FiMessageSquare, FiCpu, FiLayout, FiPhoneCall];
 
 function CaseStudy({
   study,
@@ -22,10 +35,10 @@ function CaseStudy({
   return (
     <FadeIn
       delay={index * 0.08}
-      className="flex h-full min-h-64 flex-col rounded-2xl border border-primary/15 bg-[#e8f1fc] p-7 transition-transform duration-300 hover:-translate-y-1 sm:min-h-72"
+      className="relative flex h-full min-h-44 cursor-pointer flex-col rounded-2xl border border-primary/15 bg-[#e8f1fc] p-5 transition-transform duration-300 hover:-translate-y-1"
     >
-      <h4 className="text-h1 font-bold! text-foreground">{study.name}</h4>
-      <p className="mt-5 max-w-xs text-body text-muted-foreground">
+      <h4 className="text-h2 font-bold! text-foreground">{study.name}</h4>
+      <p className="mt-3 max-w-xs text-sm text-muted-foreground">
         {study.description}
       </p>
       {"href" in study && study.href && (
@@ -33,7 +46,7 @@ function CaseStudy({
           href={study.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-auto inline-flex w-fit items-center gap-3 border-b border-primary/60 pt-6 pb-1 text-sm font-semibold text-primary hover:text-foreground"
+          className="mt-auto inline-flex w-fit items-center gap-3 border-b after:absolute after:inset-0 after:content-[''] border-primary/60 pt-4 pb-1 text-sm font-semibold text-primary hover:text-foreground"
         >
           {study.linkLabel}
           <span aria-hidden="true">↗</span>
@@ -52,7 +65,7 @@ export function DashboardFiveLanguageSolutions() {
       aria-labelledby="language-solutions-heading"
     >
       <div className="mx-auto max-w-312 px-6 md:px-8 lg:px-12">
-        <FadeIn className="grid grid-cols-1 items-end gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+        <FadeIn className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
           <div>
             <span className="mb-6 block text-xs font-bold tracking-widest text-primary uppercase">
               AI for real world interaction
@@ -68,37 +81,47 @@ export function DashboardFiveLanguageSolutions() {
               localized conversations, agents and calling experiences.
             </p>
           </div>
-          <div className="border-t border-border">
-            {SOLUTIONS_OVERVIEW.map((item, i) => (
-              <FadeIn key={item.title} delay={0.1 + i * 0.1} direction="right">
-              <a
-                href={item.href}
-                className="group flex items-start justify-between gap-4 border-b border-border py-4 transition-colors hover:bg-primary/5 sm:px-2"
-              >
-                <span>
-                  <strong className="block text-base text-foreground transition-colors group-hover:text-primary">
-                    {item.title}
-                  </strong>
-                  <small className="mt-1 block text-sm text-muted-foreground">
-                    {item.subtitle}
-                  </small>
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                >
-                  ↗
-                </span>
-              </a>
-              </FadeIn>
-            ))}
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {SOLUTIONS_OVERVIEW.map((item, i) => {
+              const Icon = SOLUTION_ICONS[i] ?? FiMessageSquare;
+              return (
+                <FadeIn key={item.title} delay={0.1 + i * 0.1} direction="right">
+                  <a
+                    href={item.href}
+                    className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-[#e8f1fc] hover:shadow-md"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="absolute top-4 right-5 text-xs font-bold tracking-widest text-primary/30"
+                    >
+                      0{i + 1}
+                    </span>
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                      <Icon aria-hidden="true" className="size-5" />
+                    </span>
+                    <strong className="mt-5 block text-base text-foreground">
+                      {item.title}
+                    </strong>
+                    <small className="mt-1 block text-sm text-muted-foreground">
+                      {item.subtitle}
+                    </small>
+                    <span
+                      aria-hidden="true"
+                      className="mt-5 ml-auto flex h-9 w-9 items-center justify-center rounded-full border border-primary/25 text-primary transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground"
+                    >
+                      <FiArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </span>
+                  </a>
+                </FadeIn>
+              );
+            })}
           </div>
         </FadeIn>
 
         <div id="conversational-ai" className="scroll-mt-24">
         <FadeIn
           delay={0.1}
-          className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16"
+          className="mt-14 grid grid-cols-1 items-start gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16"
         >
           <div>
             <span className="mb-4 block text-xs font-bold tracking-widest text-primary uppercase">
@@ -111,48 +134,14 @@ export function DashboardFiveLanguageSolutions() {
               the same conversation.
             </p>
           </div>
-          <div>
-            <div className="relative grid grid-cols-1 gap-8 border-b border-border pb-8 sm:grid-cols-2">
-              <div>
-                <span
-                  aria-hidden="true"
-                  className="mb-4 block h-10 text-2xl font-semibold text-primary"
-                >
-                  Aa
-                </span>
-                <h4 className="text-h3 text-foreground">Chatbots</h4>
-                <p className="mt-3 text-sm text-muted-foreground">
-                  Text conversations for customer support, citizen
-                  information and everyday digital services.
-                </p>
-              </div>
-              <div>
-                <VoiceBars />
-                <h4 className="text-h3 text-foreground">Voice Bots</h4>
-                <p className="mt-3 text-sm text-muted-foreground">
-                  Spoken conversations that let people ask questions and
-                  interact naturally through speech.
-                </p>
-              </div>
-            </div>
-            <div className="mt-8 rounded-xl bg-muted/40 p-6">
-              <span className="block text-xs font-semibold tracking-wide text-primary uppercase">
-                The voice capability within Conversational AI
-              </span>
-              <h4 className="mt-2 text-h3 text-foreground">Voice AI</h4>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Speech-based interaction brings local-language conversations
-                to voice-enabled experiences.
-              </p>
-            </div>
-          </div>
+          <ConversationalAIDemo />
         </FadeIn>
         </div>
 
         <div id="ai-agents" className="scroll-mt-24">
         <FadeIn
           delay={0.1}
-          className="mt-16 grid grid-cols-1 gap-10 rounded-2xl bg-[#e8f1fc] p-8 md:p-10 lg:grid-cols-2 lg:gap-16"
+          className="mt-16 grid grid-cols-1 gap-10 rounded-3xl bg-[#e8f1fc] p-8 md:p-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16"
         >
           <div>
             <span className="mb-4 block text-xs font-bold tracking-widest text-primary uppercase">
@@ -171,7 +160,7 @@ export function DashboardFiveLanguageSolutions() {
               href="https://agentstudio.diyo.ai/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-5 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/85"
+              className="mt-6 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/85"
             >
               Explore Diyo Agent Studio
               <span aria-hidden="true">→</span>
@@ -182,26 +171,59 @@ export function DashboardFiveLanguageSolutions() {
             <span className="mb-5 block text-xs font-semibold tracking-wide text-muted-foreground uppercase">
               From your knowledge to a useful interaction
             </span>
-            <ol className="flex flex-col gap-5">
-              {AGENT_FLOW.map((step) => (
-                <li key={step.title} className="flex items-start gap-4">
-                  <span
-                    aria-hidden="true"
+            <ol className="relative flex flex-col gap-3">
+              <span
+                aria-hidden="true"
+                className="absolute top-8 bottom-8 left-[1.65rem] w-px bg-primary/25"
+              />
+              {AGENT_FLOW.map((step, i) => {
+                const Icon = AGENT_ICONS[i] ?? FiGlobe;
+                const chips = step.detail.split(" · ");
+                return (
+                  <li
+                    key={step.title}
                     className={cn(
-                      "mt-1 h-3 w-3 shrink-0 rounded-full border border-primary/50",
-                      step.emphasis && "border-primary bg-primary",
+                      "relative flex items-center gap-4 rounded-2xl border p-3.5 transition-transform duration-300 hover:translate-x-1",
+                      step.emphasis
+                        ? "border-primary/40 bg-white shadow-md"
+                        : "border-primary/10 bg-white/70",
                     )}
-                  />
-                  <div>
-                    <strong className="text-base font-semibold text-foreground">
-                      {step.title}
-                    </strong>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      {step.detail}
-                    </p>
-                  </div>
-                </li>
-              ))}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl",
+                        step.emphasis
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-primary/10 text-primary",
+                      )}
+                    >
+                      <Icon className="size-5" />
+                    </span>
+                    <div className="min-w-0">
+                      <strong className="block text-base font-semibold text-foreground">
+                        {step.title}
+                      </strong>
+                      {chips.length > 1 ? (
+                        <div className="mt-1.5 flex flex-wrap gap-1.5">
+                          {chips.map((chip) => (
+                            <span
+                              key={chip}
+                              className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs text-primary"
+                            >
+                              {chip}
+                            </span>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="mt-1 text-sm text-muted-foreground">
+                          {step.detail}
+                        </p>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
             </ol>
           </div>
         </FadeIn>
@@ -210,30 +232,69 @@ export function DashboardFiveLanguageSolutions() {
         <div id="ai-calling" className="scroll-mt-24">
         <FadeIn
           delay={0.1}
-          className="mt-16 grid grid-cols-1 gap-10 rounded-2xl bg-[#0c1b33] p-8 text-white md:p-10 lg:grid-cols-2 lg:gap-16"
+          className="mt-16 grid grid-cols-1 gap-10 rounded-3xl border border-primary/15 bg-gradient-to-br from-[#f3f8fe] to-[#e3eefb] p-8 md:p-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16"
         >
           <div>
-            <span className="mb-4 block text-xs font-bold tracking-widest text-primary/70 uppercase">
+            <span className="mb-4 block text-xs font-bold tracking-widest text-primary uppercase">
               Calling &amp; assistance
             </span>
-            <h3 className="text-h1 text-white">AI Calling Assistants</h3>
-            <span className="mt-4 inline-block rounded border border-white/25 px-2.5 py-1 text-xs text-white/70">
+            <h3 className="text-h1 text-foreground">AI Calling Assistants</h3>
+            <span className="mt-4 inline-block rounded-full border border-primary/30 bg-white/70 px-3 py-1 text-xs font-medium text-primary">
               Solution direction
             </span>
-            <p className="mt-4 max-w-sm text-body-lg text-white/75">
+            <p className="mt-4 max-w-sm text-body-lg text-muted-foreground">
               Exploring structured voice conversations for sharing
               information, collecting details and following up, with a path
               to human support.
             </p>
           </div>
-          <div className="flex flex-col justify-center">
-            <span className="mb-4 block text-xs font-semibold tracking-wide text-primary/70 uppercase">
-              A possible service conversation
-            </span>
-            <ol className="flex flex-col divide-y divide-white/10">
-              {CALL_STORY.map((step) => (
-                <li key={step} className="py-4 text-sm font-medium text-white/90">
-                  {step}
+          <div className="rounded-2xl border border-primary/15 bg-white p-5 shadow-md">
+            <div className="flex items-center justify-between gap-3 border-b border-border pb-4">
+              <span className="flex items-center gap-3">
+                <span
+                  aria-hidden="true"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground"
+                >
+                  <FiPhoneCall className="size-4" />
+                </span>
+                <span>
+                  <strong className="block text-sm text-foreground">
+                    A possible service conversation
+                  </strong>
+                  <small className="block text-xs text-muted-foreground">
+                    Structured voice call
+                  </small>
+                </span>
+              </span>
+              <span
+                aria-hidden="true"
+                className="flex h-5 items-center gap-[3px]"
+              >
+                {[40, 75, 100, 60, 85, 45].map((h, i) => (
+                  <span
+                    key={i}
+                    className="block w-[3px] rounded-full bg-primary/60"
+                    style={{ height: `${h}%` }}
+                  />
+                ))}
+              </span>
+            </div>
+            <ol className="relative mt-5 flex flex-col gap-4">
+              <span
+                aria-hidden="true"
+                className="absolute top-4 bottom-4 left-4 w-px bg-primary/20"
+              />
+              {CALL_STORY.map((step, i) => (
+                <li key={step} className="relative flex items-center gap-4">
+                  <span
+                    aria-hidden="true"
+                    className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-primary/30 bg-[#e8f1fc] text-xs font-bold text-primary"
+                  >
+                    {i + 1}
+                  </span>
+                  <span className="flex-1 rounded-xl bg-[#f3f8fe] px-4 py-3 text-sm font-medium text-foreground">
+                    {step}
+                  </span>
                 </li>
               ))}
             </ol>
@@ -259,7 +320,7 @@ export function DashboardFiveLanguageSolutions() {
             </p>
           </FadeIn>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
             {CASE_STUDIES.map((study, i) => (
               <CaseStudy key={study.id} study={study} index={i} />
             ))}

@@ -12,7 +12,6 @@ import { DashboardFiveTestimonials } from "./components/testimonials";
 import { DashboardFiveNews } from "./components/news";
 import { DashboardFiveBanner } from "./components/banner";
 import { DashboardFiveClients } from "./components/clients";
-import { DashboardFiveContact } from "./components/contact";
 import { MotionRoot } from "./components/motion-root";
 import { DashboardFiveFooter } from "./components/footer";
 
@@ -41,7 +40,6 @@ export function DashboardFive() {
           <DashboardFiveAwards />
           <DashboardFiveNews />
           <DashboardFiveTestimonials />
-          <DashboardFiveContact />
         </main>
         <DashboardFiveFooter />
       </div>

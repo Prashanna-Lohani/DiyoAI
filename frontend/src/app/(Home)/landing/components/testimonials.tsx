@@ -23,24 +23,37 @@ export function DashboardFiveTestimonials() {
   return (
     <section
       id="testimonials"
-      className="overflow-hidden bg-[#05234a] py-16 text-white lg:py-24"
+      className="overflow-hidden bg-gradient-to-b from-white to-[#f3f8fe] py-16 lg:py-24"
     >
       <FadeIn className="mx-auto max-w-312 px-6 text-center md:px-8 lg:px-12">
-        <h2 className="text-h1 text-white">Voices that reflect the value</h2>
+        <span className="mb-4 block text-xs font-bold tracking-widest text-primary uppercase">
+          Testimonials
+        </span>
+        <h2 className="text-h1 text-foreground">
+          Voices that reflect the value
+        </h2>
       </FadeIn>
       <div className="mx-auto mt-10 max-w-312 px-6 md:px-8 lg:px-12">
-        <div className="overflow-hidden [&:active_.marquee-track]:[animation-play-state:paused] [&:hover_.marquee-track]:[animation-play-state:paused]">
+        <div className="[-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           <Marquee
             items={items}
             duration={150}
             renderItem={(t) => (
-              <figure className="flex h-52 w-64 flex-col justify-between rounded-xl bg-white p-6 text-left text-foreground shadow-md sm:w-96">
-                <blockquote className="text-body">{t.quote}</blockquote>
+              <figure className="relative flex h-52 w-72 flex-col justify-between rounded-2xl border border-primary/15 bg-white p-6 text-left text-foreground transition-shadow duration-300 hover:shadow-lg sm:w-96">
+                <span
+                  aria-hidden="true"
+                  className="absolute top-3 right-5 font-serif text-6xl leading-none text-primary/15"
+                >
+                  &ldquo;
+                </span>
+                <blockquote className="relative text-body">
+                  {t.quote}
+                </blockquote>
                 <figcaption className="flex items-center gap-3">
                   <Image
                     src={t.photo}
                     alt={t.name}
-                    className="h-12 w-12 shrink-0 rounded-full object-cover"
+                    className="h-12 w-12 shrink-0 rounded-full object-cover ring-2 ring-primary/20"
                   />
                   <span className="flex min-w-0 flex-col">
                     <span className="text-sm font-bold">{t.name}</span>
@@ -54,7 +67,7 @@ export function DashboardFiveTestimonials() {
           />
         </div>
       </div>
-      <p className="mx-auto mt-6 max-w-312 px-6 text-xs text-white/80 md:px-8 lg:px-12">
+      <p className="mt-6 text-center text-xs text-muted-foreground">
         From voices featured on Diyo.ai
       </p>
     </section>

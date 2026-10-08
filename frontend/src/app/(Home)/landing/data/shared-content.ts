@@ -1,15 +1,18 @@
 export type Lang = "en" | "np";
 
-export const HERO_COPY: Record<Lang, { heading: string; tagline: string; sub: string }> = {
+export const HERO_COPY: Record<
+  Lang,
+  { heading: string; tagline: string; sub: string }
+> = {
   en: {
     heading: "AI that understands your language",
     tagline: "AI that understands your language",
-    sub: "Leading in Speech and Language AI for low-resource settings — conversational AI, speech technology and language solutions built for Nepali and the languages of Nepal.",
+    sub: "Leading in Speech and Language AI for low-resource settings: conversational AI, speech technology and language solutions built for Nepali and the languages of Nepal.",
   },
   np: {
     heading: "तपाईंको भाषा बोल्ने AI।",
     tagline: "तपाईंको भाषा बुझ्ने AI",
-    sub: "कम-स्रोत भाषाहरूका लागि स्पीच र भाषा AI मा अग्रणी — नेपाली र नेपालका भाषाहरूका लागि बनाइएको संवादात्मक AI, स्पीच प्रविधि र भाषा समाधानहरू।",
+    sub: "कम-स्रोत भाषाहरूका लागि स्पीच र भाषा AI मा अग्रणी: नेपाली र नेपालका भाषाहरूका लागि बनाइएको संवादात्मक AI, स्पीच प्रविधि र भाषा समाधानहरू।",
   },
 };
 
@@ -19,8 +22,16 @@ export const VOICE_STEPS = [
     label: "Speech",
     detail: "“नमस्ते, मलाई सहयोग चाहियो”",
   },
-  { icon: "transcribe", label: "Transcription", detail: "Nepali speech → text" },
-  { icon: "brain", label: "AI Understanding", detail: "intent + knowledge base" },
+  {
+    icon: "transcribe",
+    label: "Transcription",
+    detail: "Nepali speech → text",
+  },
+  {
+    icon: "brain",
+    label: "AI Understanding",
+    detail: "intent + knowledge base",
+  },
   {
     icon: "response",
     label: "Response",
@@ -49,10 +60,11 @@ export const SERVICE_CHOICES = [
     id: "translation",
     no: "01",
     title: "Translation",
-    description: "Bring meaning across languages with translation and localization.",
+    description:
+      "Bring meaning across languages with translation and localization.",
     example: {
       label: "English → Nepali",
-      source: "My country is dearer to me than life",
+      source: "My country is dearer to me than life itself",
       sourceLang: "en",
       output: "मेरो देश मलाई प्राणभन्दा प्यारो छ।",
       romanLabel: "Romanized Nepali",
@@ -78,7 +90,8 @@ export const SERVICE_CHOICES = [
     id: "text",
     no: "03",
     title: "Speech to Text",
-    description: "Convert spoken Nepali into text for transcription and digital use.",
+    description:
+      "Convert spoken Nepali into text for transcription and digital use.",
     example: {
       label: "Spoken voice → Written text",
       source: "wave",

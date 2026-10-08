@@ -6,35 +6,35 @@ export function DashboardFivePreservation() {
   return (
     <section
       id="preservation"
-      className="bg-[#0c1b33] py-16 text-[#eaf1fb] lg:py-24"
+      className="bg-[#f3f8fe] py-16 text-muted-foreground lg:py-24"
     >
       <div className="mx-auto max-w-312 px-6 md:px-8 lg:px-12">
         <FadeIn>
-          <span className="mb-6 block text-xs font-bold tracking-widest text-[#86bcff] uppercase">
-            02 / Preserve &amp; develop
+          <span className="mb-6 block text-xs font-bold tracking-widest text-primary uppercase">
+            Preserve &amp; develop
           </span>
-          <h2 className="max-w-3xl text-display text-white">
-            Language <span className="text-[#86bcff]">Preservation</span>
+          <h2 className="max-w-3xl text-display text-foreground">
+            Language <span className="text-primary">Preservation</span>
           </h2>
 
           <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-14">
-            <p className="text-h3 font-semibold text-white">
+            <p className="text-h3 font-semibold text-foreground">
               From a spoken word to a living resource
             </p>
-            <p className="text-body-lg text-[#cbd9ec]">
+            <p className="text-body-lg text-muted-foreground">
               Documenting languages is the beginning. Collecting, annotating
               and developing language resources supports their preservation
               and use in the digital world.
             </p>
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4 border-y border-white/15 py-5 text-sm text-[#cee0f5] sm:gap-6">
+          <div className="mt-8 flex flex-wrap items-center gap-4 border-y border-primary/15 py-5 text-sm text-muted-foreground sm:gap-6">
             <span>Collection</span>
-            <b aria-hidden="true" className="font-normal text-[#86bcff]">
+            <b aria-hidden="true" className="font-normal text-primary">
               →
             </b>
             <span>Annotation</span>
-            <b aria-hidden="true" className="font-normal text-[#86bcff]">
+            <b aria-hidden="true" className="font-normal text-primary">
               →
             </b>
             <span>Revitalization</span>
@@ -44,7 +44,7 @@ export function DashboardFivePreservation() {
         <ol className="relative mt-14 flex flex-col gap-14">
           <div
             aria-hidden="true"
-            className="absolute top-6 bottom-6 left-6 hidden w-px bg-[#86bcff]/35 sm:block"
+            className="absolute top-6 bottom-6 left-6 hidden w-px bg-primary/35 sm:block"
           />
           {PRESERVATION_STAGES.map((stage, i) => (
             <FadeIn
@@ -52,33 +52,33 @@ export function DashboardFivePreservation() {
               delay={i * 0.08}
               className="grid grid-cols-1 gap-6 sm:grid-cols-[48px_1fr_1fr] sm:gap-9"
             >
-              <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-[#86bcff]/50 bg-[#0c1b33] text-xs text-[#86bcff]">
+              <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-primary/50 bg-white text-xs text-primary">
                 {stage.no}
               </div>
               <div>
-                <span className="mb-3.5 block text-[0.68rem] font-bold tracking-widest text-[#86bcff] uppercase">
+                <span className="mb-3.5 block text-[0.68rem] font-bold tracking-widest text-primary uppercase">
                   {stage.kicker}
                 </span>
-                <h3 className="text-h2 text-white">{stage.title}</h3>
-                <p className="mt-4 max-w-sm text-sm text-[#b4c6dd]">
+                <h3 className="text-h2 text-foreground">{stage.title}</h3>
+                <p className="mt-4 max-w-sm text-sm text-muted-foreground">
                   {stage.description}
                 </p>
               </div>
-              <div className="flex min-h-56 flex-col justify-between rounded-xl border-y border-white/15 bg-gradient-to-br from-primary/10 to-transparent px-6 py-5">
-                <span className="text-[0.65rem] tracking-widest text-[#9ebcde] uppercase">
+              <div className="flex min-h-56 flex-col justify-between rounded-xl border-y border-primary/15 bg-gradient-to-br from-white to-white/40 px-6 py-5">
+                <span className="text-[0.65rem] tracking-widest text-muted-foreground uppercase">
                   {stage.resourceLabel}
                 </span>
 
                 {"tags" in stage && stage.tags ? (
                   <>
-                    <div className="my-3 w-fit border-b border-dashed border-[#86bcff]/40 pb-1.5 font-sans text-4xl text-white">
+                    <div className="my-3 w-fit border-b border-dashed border-primary/40 pb-1.5 font-sans text-4xl text-foreground">
                       {stage.word}
                     </div>
                     <div className="flex flex-wrap gap-2.5">
                       {stage.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="border border-[#86bcff]/40 px-3 py-1 text-xs text-[#86bcff]"
+                          className="border border-primary/40 px-3 py-1 text-xs text-primary"
                         >
                           {tag}
                         </span>
@@ -86,8 +86,8 @@ export function DashboardFivePreservation() {
                     </div>
                   </>
                 ) : "orbit" in stage && stage.orbit ? (
-                  <div className="mt-3 grid grid-cols-2 items-center gap-3 text-sm text-[#86bcff]">
-                    <span className="row-span-3 border-r border-[#86bcff]/40 pr-3 font-sans text-4xl text-white">
+                  <div className="mt-3 grid grid-cols-2 items-center gap-3 text-sm text-primary">
+                    <span className="row-span-3 border-r border-primary/40 pr-3 font-sans text-4xl text-foreground">
                       {stage.orbit[0]}
                     </span>
                     {stage.orbit.slice(1).map((item) => (
@@ -99,14 +99,14 @@ export function DashboardFivePreservation() {
                     {Array.from({ length: 22 }).map((_, i) => (
                       <span
                         key={i}
-                        className="block w-1 rounded bg-[#86bcff]"
+                        className="block w-1 rounded bg-primary"
                         style={{ height: `${[35, 70, 100, 55, 85][i % 5]}%` }}
                       />
                     ))}
                   </div>
                 )}
 
-                <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-3.5 text-[0.68rem] text-[#b4c6dd]">
+                <div className="mt-3 flex items-center justify-between border-t border-primary/15 pt-3.5 text-[0.68rem] text-muted-foreground">
                   {stage.bottom}
                 </div>
               </div>
@@ -114,29 +114,29 @@ export function DashboardFivePreservation() {
           ))}
         </ol>
 
-        <FadeIn className="mt-16 border-t border-[#86bcff]/35 pt-11 pl-0 sm:ml-6 sm:pl-15">
-          <span className="mb-5 block text-xs font-bold tracking-widest text-[#86bcff] uppercase">
+        <FadeIn className="mt-16 border-t border-primary/35 pt-11 pl-0 sm:ml-6 sm:pl-15">
+          <span className="mb-5 block text-xs font-bold tracking-widest text-primary uppercase">
             The work continues through our initiatives
           </span>
-          <h3 className="max-w-2xl text-h1 text-white">
+          <h3 className="max-w-2xl text-h1 text-foreground">
             Rooted in language, built for its future
           </h3>
-          <p className="mt-5 max-w-2xl text-body-lg text-[#cbd9ec]">
+          <p className="mt-5 max-w-2xl text-body-lg text-muted-foreground">
             Our in-house language initiatives, NepSwor and YetiVoices, focus
             on documenting, preserving and developing resources for regional
             and Himalayan languages.
           </p>
 
-          <div className="mt-11 grid grid-cols-1 gap-8 border-b border-white/15 pb-8 sm:grid-cols-2">
+          <div className="mt-11 grid grid-cols-1 gap-8 border-b border-primary/15 pb-8 sm:grid-cols-2">
             {INITIATIVES.map((initiative, i) => (
               <div
                 key={initiative.name}
                 className={
-                  i > 0 ? "border-t border-white/15 pt-6 sm:border-t-0 sm:border-l sm:pt-0 sm:pl-10" : ""
+                  i > 0 ? "border-t border-primary/15 pt-6 sm:border-t-0 sm:border-l sm:pt-0 sm:pl-10" : ""
                 }
               >
                 {initiative.art === "glyph" ? (
-                  <div className="mb-6 flex h-20 items-center gap-6 font-sans text-6xl text-[#86bcff]">
+                  <div className="mb-6 flex h-20 items-center gap-6 font-sans text-6xl text-primary">
                     अ<span className="text-4xl font-normal">→</span>
                   </div>
                 ) : (
@@ -144,7 +144,7 @@ export function DashboardFivePreservation() {
                     viewBox="0 0 220 80"
                     fill="none"
                     aria-hidden="true"
-                    className="mb-6 block h-20 w-56 max-w-full text-[#86bcff]"
+                    className="mb-6 block h-20 w-56 max-w-full text-primary"
                   >
                     <path
                       d="M5 72L60 17L91 49L131 5L208 72M38 39L60 48L76 35M109 29L132 42L150 26"
@@ -153,17 +153,17 @@ export function DashboardFivePreservation() {
                     />
                   </svg>
                 )}
-                <span className="block text-[0.65rem] tracking-widest text-[#9ebcde] uppercase">
+                <span className="block text-[0.65rem] tracking-widest text-muted-foreground uppercase">
                   Language preservation initiative
                 </span>
-                <h4 className="mt-2.5 text-h1 font-bold text-white">
+                <h4 className="mt-2.5 text-h1 font-bold text-foreground">
                   {initiative.name}
                 </h4>
               </div>
             ))}
           </div>
 
-          <p className="mt-6 text-xs text-[#b4c6dd]">
+          <p className="mt-6 text-xs text-muted-foreground">
             Documenting voices · Structuring knowledge · Developing language
             resources
           </p>

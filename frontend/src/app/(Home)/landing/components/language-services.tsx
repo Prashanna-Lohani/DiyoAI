@@ -143,7 +143,7 @@ export function DashboardFiveLanguageServices() {
           </div>
           <p className="text-body-lg text-muted-foreground">
             Across languages, across formats. Translate, transcribe, subtitle
-            and give text a voice — built around the way people communicate.
+            and give text a voice, built around the way people communicate.
           </p>
         </FadeIn>
 
@@ -255,31 +255,33 @@ export function DashboardFiveLanguageServices() {
 
         <FadeIn
           delay={0.15}
-          className="mt-10 grid grid-cols-1 gap-8 rounded-2xl border-t-4 border-primary bg-[#e8f1fc] p-6 sm:p-8 md:grid-cols-[1fr_1fr_1fr] md:gap-0"
+          className="mt-10 rounded-2xl border-t-4 border-primary bg-[#e8f1fc] p-6 sm:p-8"
         >
-          <div className="md:pr-8">
-            <span className="mb-4 block text-[0.68rem] font-bold tracking-widest text-primary uppercase">
-              Access language technology
-            </span>
-            <h3 className="text-h2 text-foreground">Choose how you work</h3>
-            <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              Use the Platform directly or connect language capabilities to your
-              own applications through the API.
-            </p>
-          </div>
-          <div className="border-t border-primary/20 pt-6 md:border-t-0 md:border-l md:px-8 md:pt-0">
-            <h4 className="text-h2 text-foreground">Platform</h4>
-            <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              Work with Diyo.ai&apos;s language capabilities through the Diyo.ai
-              Platform.
-            </p>
-          </div>
-          <div className="border-t border-primary/20 pt-6 md:border-t-0 md:border-l md:pl-8 md:pt-0">
-            <h4 className="text-h2 text-foreground">API</h4>
-            <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              Use Diyo.ai&apos;s language technology programmatically through an
-              API.
-            </p>
+          <span className="mb-5 block text-[0.65rem] font-bold tracking-widest text-primary uppercase">
+            Access language technology
+          </span>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-0">
+            <div className="md:pr-8">
+              <h3 className="text-h3 text-foreground">Choose how you work</h3>
+              <p className="mt-3 max-w-xs text-sm text-muted-foreground">
+                Use the Platform directly or connect language capabilities to
+                your own applications through the API.
+              </p>
+            </div>
+            <div className="border-t border-primary/20 pt-6 md:border-t-0 md:border-l md:px-8 md:pt-0">
+              <h4 className="text-h3 text-foreground">Platform</h4>
+              <p className="mt-3 max-w-xs text-sm text-muted-foreground">
+                Work with Diyo.ai&apos;s language capabilities through the
+                Diyo.ai Platform.
+              </p>
+            </div>
+            <div className="border-t border-primary/20 pt-6 md:border-t-0 md:border-l md:pl-8 md:pt-0">
+              <h4 className="text-h3 text-foreground">API</h4>
+              <p className="mt-3 max-w-xs text-sm text-muted-foreground">
+                Use Diyo.ai&apos;s language technology programmatically
+                through an API.
+              </p>
+            </div>
           </div>
         </FadeIn>
       </div>
