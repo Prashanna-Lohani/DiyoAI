@@ -64,9 +64,8 @@ export function DashboardFiveHero() {
   const { lang } = useDashboardFiveLang();
   const copy = HERO_COPY[lang];
   const [activeStep, setActiveStep] = useState(0);
-  const [manualPause, setManualPause] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const paused = manualPause || hovered;
+  const paused = hovered;
 
   useEffect(() => {
     if (paused) return;
@@ -209,14 +208,6 @@ export function DashboardFiveHero() {
             <p className="mt-3.5 text-center text-xs text-muted-foreground">
               A Diyo voice agent, end to end.
             </p>
-            <button
-              type="button"
-              onClick={() => setManualPause((p) => !p)}
-              aria-pressed={manualPause}
-              className="mx-auto mt-2.5 block rounded-lg border border-border px-3.5 py-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {manualPause ? "Resume animation" : "Pause animation"}
-            </button>
           </div>
           </motion.div>
         </FadeIn>

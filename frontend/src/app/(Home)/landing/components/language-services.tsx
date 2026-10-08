@@ -14,7 +14,7 @@ function ExampleValue({ value, lang }: { value: string; lang?: string }) {
       <span
         role="img"
         aria-label="Illustration of a speech waveform"
-        className="flex h-16 w-full max-w-56 items-center justify-center gap-1"
+        className="mx-auto flex h-16 w-full max-w-56 items-center justify-center gap-1"
       >
         {Array.from({ length: 24 }).map((_, i) => (
           <span
@@ -37,10 +37,16 @@ function ExampleValue({ value, lang }: { value: string; lang?: string }) {
 
 type Choice = (typeof SERVICE_CHOICES)[number];
 
-function ExampleBody({ choice, compact }: { choice: Choice; compact?: boolean }) {
+function ExampleBody({
+  choice,
+  compact,
+}: {
+  choice: Choice;
+  compact?: boolean;
+}) {
   const size = compact ? "text-h3" : "text-h2";
   return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-3 py-6 text-center">
+    <div className="flex flex-1 flex-col items-center justify-center gap-4 py-6 text-center">
       <motion.span
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
@@ -53,10 +59,19 @@ function ExampleBody({ choice, compact }: { choice: Choice; compact?: boolean })
         initial={{ opacity: 0, x: -14 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.4, delay: 0.1 }}
-        className={cn("w-full whitespace-nowrap text-primary", size)}
+        className={cn(
+          "w-full text-balance text-primary",
+          choice.example.source.length <= 45
+            ? "lg:whitespace-nowrap"
+            : "line-clamp-3 px-2 text-h3 leading-[1.7]",
+          choice.example.source.length <= 45 && size,
+        )}
         lang={choice.example.sourceLang}
       >
-        <ExampleValue value={choice.example.source} lang={choice.example.sourceLang} />
+        <ExampleValue
+          value={choice.example.source}
+          lang={choice.example.sourceLang}
+        />
       </motion.span>
       <motion.span
         aria-hidden="true"
@@ -71,21 +86,31 @@ function ExampleBody({ choice, compact }: { choice: Choice; compact?: boolean })
         initial={{ opacity: 0, x: 14 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.4, delay: 0.35 }}
-        className={cn("w-full whitespace-nowrap text-foreground", size)}
+        className={cn(
+          "w-full text-balance text-foreground",
+          choice.example.output.length <= 45
+            ? "lg:whitespace-nowrap"
+            : "line-clamp-3 px-2 text-h3 leading-[1.7]",
+          choice.example.output.length <= 45 && size,
+        )}
       >
         <ExampleValue value={choice.example.output} />
       </motion.strong>
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.45 }}
-        className="flex flex-col items-center gap-1"
-      >
-        <span className="text-xs tracking-widest text-primary uppercase">
-          {choice.example.romanLabel}
-        </span>
-        <span className="text-sm text-foreground/80">{choice.example.roman}</span>
-      </motion.span>
+      {"roman" in choice.example && (
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.45 }}
+          className="flex flex-col items-center gap-1"
+        >
+          <span className="text-xs tracking-widest text-primary uppercase">
+            {choice.example.romanLabel}
+          </span>
+          <span className="text-sm text-foreground/80">
+            {choice.example.roman}
+          </span>
+        </motion.span>
+      )}
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -158,7 +183,7 @@ export function DashboardFiveLanguageServices() {
                     aria-pressed={active}
                     aria-expanded={active}
                     className={cn(
-                      "relative grid w-full grid-cols-[24px_1fr_24px] items-start gap-4 py-6 pl-4 text-left transition-colors",
+                      "relative grid w-full grid-cols-[24px_1fr_24px] items-start gap-4 py-6 pl-4 text-left outline-none transition-colors focus-visible:bg-primary/5 focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-inset",
                       active && "text-primary",
                     )}
                   >
@@ -166,7 +191,11 @@ export function DashboardFiveLanguageServices() {
                       <motion.span
                         layoutId="service-choice-indicator"
                         className="absolute top-2 bottom-2 left-0 w-0.5 rounded-full bg-primary"
-                        transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 32,
+                        }}
                       />
                     )}
                     <span className="pt-1.5 text-xs text-muted-foreground">
@@ -189,7 +218,9 @@ export function DashboardFiveLanguageServices() {
                       aria-hidden="true"
                       className={cn(
                         "text-xl transition-transform duration-300",
-                        active ? "rotate-90 text-primary" : "text-muted-foreground",
+                        active
+                          ? "translate-x-1 text-primary"
+                          : "text-muted-foreground",
                       )}
                     >
                       →
@@ -232,22 +263,22 @@ export function DashboardFiveLanguageServices() {
             </span>
             <h3 className="text-h2 text-foreground">Choose how you work</h3>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              Use the Platform directly or connect language capabilities to
-              your own applications through the API.
+              Use the Platform directly or connect language capabilities to your
+              own applications through the API.
             </p>
           </div>
           <div className="border-t border-primary/20 pt-6 md:border-t-0 md:border-l md:px-8 md:pt-0">
             <h4 className="text-h2 text-foreground">Platform</h4>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              Work with Diyo.ai&apos;s language capabilities through the
-              Diyo.ai Platform.
+              Work with Diyo.ai&apos;s language capabilities through the Diyo.ai
+              Platform.
             </p>
           </div>
           <div className="border-t border-primary/20 pt-6 md:border-t-0 md:border-l md:pl-8 md:pt-0">
             <h4 className="text-h2 text-foreground">API</h4>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              Use Diyo.ai&apos;s language technology programmatically through
-              an API.
+              Use Diyo.ai&apos;s language technology programmatically through an
+              API.
             </p>
           </div>
         </FadeIn>
