@@ -3,45 +3,31 @@
 import { useState } from "react";
 import { FiMessageSquare, FiMic, FiVolume2 } from "react-icons/fi";
 
+import type { PageContent } from "@/content";
 import { cn } from "@/lib/utils";
 
-const MODES = [
-  {
-    id: "chat",
-    label: "Chatbots",
-    icon: FiMessageSquare,
-    detail:
-      "Text conversations for customer support, citizen information and everyday digital services.",
-  },
-  {
-    id: "voice",
-    label: "Voice Bots",
-    icon: FiMic,
-    detail:
-      "Spoken conversations that let people ask questions and interact naturally through speech.",
-  },
-] as const;
+type Content = PageContent["solutions"]["conversational"];
 
 const BARS = [30, 55, 80, 45, 95, 65, 40, 75, 50, 28, 60, 85, 42, 70, 35];
 
-function ChatView() {
+function ChatView({ content }: { content: Content }) {
   return (
     <div className="flex flex-col gap-3">
       <div className="max-w-[80%] self-end rounded-2xl rounded-br-sm bg-primary px-4 py-2.5 text-sm text-primary-foreground">
-        नमस्ते, मलाई सहयोग चाहियो
+        {content.chatUserMessage}
       </div>
       <div className="max-w-[80%] self-start rounded-2xl rounded-bl-sm border border-border bg-white px-4 py-2.5 text-sm text-foreground">
-        अवश्य, म सहयोग गर्छु। तपाईंलाई के जानकारी चाहिएको हो?
+        {content.chatBotMessage}
       </div>
       <div className="mt-1 flex items-center gap-2 self-start rounded-full border border-border bg-white px-3 py-1.5 text-xs text-muted-foreground">
         <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-        Typing in Nepali, English and more
+        {content.chatHint}
       </div>
     </div>
   );
 }
 
-function VoiceView() {
+function VoiceView({ content }: { content: Content }) {
   return (
     <div className="flex flex-col items-center gap-4 py-2">
       <span className="flex h-14 items-center gap-[5px]" aria-hidden="true">
@@ -54,17 +40,21 @@ function VoiceView() {
         ))}
       </span>
       <div className="w-full rounded-xl border border-border bg-white px-4 py-3 text-center text-sm text-foreground">
-        “नमस्ते, मलाई सहयोग चाहियो”
+        {content.voiceTranscript}
       </div>
       <div className="flex items-center gap-2 text-xs text-muted-foreground">
         <FiVolume2 aria-hidden="true" className="size-4 text-primary" />
-        Replies back in natural Nepali speech
+        {content.voiceHint}
       </div>
     </div>
   );
 }
 
-export function ConversationalAIDemo() {
+export function ConversationalAIDemo({ content }: { content: Content }) {
+  const MODES = [
+    { id: "chat", label: content.chatLabel, icon: FiMessageSquare, detail: content.chatDetail },
+    { id: "voice", label: content.voiceLabel, icon: FiMic, detail: content.voiceDetail },
+  ] as const;
   const [mode, setMode] = useState<(typeof MODES)[number]["id"]>("chat");
   const active = MODES.find((m) => m.id === mode)!;
 
@@ -99,7 +89,11 @@ export function ConversationalAIDemo() {
       </div>
 
       <div className="mt-5 min-h-44 rounded-xl bg-white/60 p-4">
-        {mode === "chat" ? <ChatView /> : <VoiceView />}
+        {mode === "chat" ? (
+          <ChatView content={content} />
+        ) : (
+          <VoiceView content={content} />
+        )}
       </div>
 
       <p className="mt-4 text-sm text-muted-foreground">{active.detail}</p>
@@ -110,12 +104,13 @@ export function ConversationalAIDemo() {
         </span>
         <div>
           <span className="block text-[0.65rem] font-bold tracking-widest text-primary uppercase">
-            The voice capability within Conversational AI
+            {content.voiceEyebrow}
           </span>
-          <h4 className="mt-1 text-h3 text-foreground">Voice AI</h4>
+          <h4 className="mt-1 text-h3 text-foreground">
+            {content.voiceTitle}
+          </h4>
           <p className="mt-1 text-sm text-muted-foreground">
-            Speech-based interaction brings local-language conversations to
-            voice-enabled experiences.
+            {content.voiceText}
           </p>
         </div>
       </div>

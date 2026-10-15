@@ -2,26 +2,26 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { FadeIn } from "@/components/ui/fade-in";
-import { NEWS_ARTICLES } from "@/utils/constants";
+import type { PageContent } from "@/content";
 
-const ARTICLES = ["Setopati", "Kantipur"]
-  .map((outlet) => NEWS_ARTICLES.find((a) => a.outlet === outlet))
-  .filter((a): a is (typeof NEWS_ARTICLES)[number] => Boolean(a));
-
-export function DashboardFiveNews() {
+export function DashboardFiveNews({
+  content,
+}: {
+  content: PageContent["news"];
+}) {
   return (
     <section id="news" className="bg-background py-16 lg:py-24">
       <div className="mx-auto max-w-312 px-6 md:px-8 lg:px-12">
         <FadeIn>
           <span className="mb-4 block text-xs font-bold tracking-widest text-primary uppercase">
-            In the news
+            {content.eyebrow}
           </span>
           <h2 className="text-display font-bold text-foreground">
-            Diyo in the news
+            {content.heading}
           </h2>
         </FadeIn>
         <FadeIn delay={0.1} className="mt-10 border-t border-border">
-          {ARTICLES.map((article) => (
+          {content.items.map((article) => (
             <Link
               key={article.href}
               href={article.href}
@@ -30,11 +30,13 @@ export function DashboardFiveNews() {
               className="group grid grid-cols-[72px_1fr_20px] items-center gap-4 border-b border-border py-5 transition-colors hover:bg-primary/5 sm:grid-cols-[150px_1fr_20px] sm:gap-8 sm:px-3"
             >
               <span className="flex items-center gap-3">
-                <Image
-                  src={article.logo}
-                  alt={article.outlet}
-                  className="h-8 w-auto max-w-18 object-contain sm:h-9"
-                />
+                {article.logo && (
+                  <Image
+                    src={article.logo}
+                    alt={article.outlet}
+                    className="h-8 w-auto max-w-18 object-contain sm:h-9"
+                  />
+                )}
                 <span className="hidden text-xs text-primary sm:inline">
                   {article.outlet}
                 </span>

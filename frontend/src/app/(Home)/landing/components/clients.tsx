@@ -1,25 +1,24 @@
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 
 import { FadeIn } from "@/components/ui/fade-in";
 import { Marquee } from "@/components/ui/marquee";
-import { COLLABORATORS } from "@/utils/constants";
+import type { PageContent } from "@/content";
 
-import { CLIENTS, PARTNERS } from "../data/content";
+type Clients = PageContent["clients"];
 
 function LogoRow({
   id,
   title,
-  names,
+  logos,
   duration = 80,
 }: {
   id?: string;
   title: string;
-  names: readonly string[];
+  logos: Clients["clients"];
   duration?: number;
 }) {
-  const items = names
-    .map((name) => COLLABORATORS.find((c) => c.label === name))
-    .filter((c): c is { src: StaticImageData; label: string } => Boolean(c));
+  const items = logos.filter((c) => c.logo);
+  if (items.length === 0) return null;
 
   // Repeat the set so each marquee half is wider than the viewport.
   const loop = [...items, ...items, ...items];
@@ -35,12 +34,12 @@ function LogoRow({
           renderItem={(item) => (
             <div className="flex w-44 flex-col items-center gap-3 text-center">
               <Image
-                src={item.src}
-                alt={item.label}
+                src={item.logo}
+                alt={item.name}
                 className="h-12 w-auto max-w-24 object-contain"
               />
               <span className="max-w-40 text-xs text-muted-foreground">
-                {item.label}
+                {item.name}
               </span>
             </div>
           )}
@@ -50,7 +49,7 @@ function LogoRow({
   );
 }
 
-export function DashboardFiveClients() {
+export function DashboardFiveClients({ content }: { content: Clients }) {
   return (
     <section
       id="clients"
@@ -59,18 +58,18 @@ export function DashboardFiveClients() {
       <div className="mx-auto max-w-312 px-6 md:px-8 lg:px-12">
         <FadeIn>
           <span className="mb-4 block text-xs font-bold tracking-widest text-primary uppercase">
-            Working together
+            {content.eyebrow}
           </span>
           <h2 className="text-h1 font-bold text-foreground">
-            Clients &amp; collaborators
+            {content.heading}
           </h2>
         </FadeIn>
         <FadeIn delay={0.1} className="mt-8 border-t border-border">
-          <LogoRow title="Clients" names={CLIENTS} />
+          <LogoRow title={content.clientsTitle} logos={content.clients} />
           <LogoRow
             id="partners"
-            title="Partners & collaboration"
-            names={PARTNERS}
+            title={content.partnersTitle}
+            logos={content.partners}
             duration={95}
           />
         </FadeIn>

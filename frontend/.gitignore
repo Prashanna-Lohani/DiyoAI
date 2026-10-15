@@ -42,3 +42,4 @@ next-env.d.ts
 
 # internal design reference (not for public repo)
 design-system.md
+!.env.example

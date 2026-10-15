@@ -1,9 +1,5 @@
+import type { PageContent } from "@/content";
 import { FadeIn } from "@/components/ui/fade-in";
-
-const AWARDS = [
-  { name: "NYEF Startup Award · 2022", note: "Second Runner Up" },
-  { name: "LINE Bot Awards", note: "Innovative Chatbot Award" },
-] as const;
 
 // Cubic stem bowing outward like half of a wreath.
 const STEM = { p0: [36, 92], p1: [-6, 74], p2: [-8, 30], p3: [30, 4] } as const;
@@ -75,15 +71,19 @@ function Laurel({ flip }: { flip?: boolean }) {
   );
 }
 
-export function DashboardFiveAwards() {
+export function DashboardFiveAwards({
+  content,
+}: {
+  content: PageContent["awards"];
+}) {
   return (
     <section id="awards" className="bg-background py-16 lg:py-20">
       <FadeIn className="mx-auto max-w-312 px-6 text-center md:px-8 lg:px-12">
-        <h2 className="text-h1 text-foreground">Awards and recognitions</h2>
+        <h2 className="text-h1 text-foreground">{content.heading}</h2>
         <div className="mt-10 flex flex-col items-center justify-center gap-10 sm:flex-row sm:gap-20 lg:gap-32">
-          {AWARDS.map((award, i) => (
+          {content.items.map((award, i) => (
             <FadeIn
-              key={award.name}
+              key={`${award.name}-${i}`}
               delay={0.1 + i * 0.15}
               direction="scale"
               className="flex items-center gap-3"

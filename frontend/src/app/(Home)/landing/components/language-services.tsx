@@ -4,9 +4,10 @@ import { useState, type CSSProperties } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { FadeIn } from "@/components/ui/fade-in";
+import type { PageContent } from "@/content";
 import { cn } from "@/lib/utils";
 
-import { SERVICE_CHOICES } from "../data/shared-content";
+type Services = PageContent["services"];
 
 function ExampleValue({ value, lang }: { value: string; lang?: string }) {
   if (value === "wave") {
@@ -35,7 +36,7 @@ function ExampleValue({ value, lang }: { value: string; lang?: string }) {
   );
 }
 
-type Choice = (typeof SERVICE_CHOICES)[number];
+type Choice = Services["choices"][number];
 
 function ExampleBody({
   choice,
@@ -96,7 +97,7 @@ function ExampleBody({
       >
         <ExampleValue value={choice.example.output} />
       </motion.strong>
-      {"roman" in choice.example && (
+      {choice.example.roman && (
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -129,8 +130,15 @@ const GRID_BG: CSSProperties = {
   backgroundSize: "32px 32px",
 };
 
-export function DashboardFiveLanguageServices() {
-  const [selected, setSelected] = useState<Choice>(SERVICE_CHOICES[0]);
+export function DashboardFiveLanguageServices({
+  content,
+}: {
+  content: Services;
+}) {
+  const [selectedId, setSelectedId] = useState(content.choices[0]?.id);
+  const selected =
+    content.choices.find((c) => c.id === selectedId) ?? content.choices[0];
+  if (!selected) return null;
 
   return (
     <section id="services" className="bg-background py-16 lg:py-24">
@@ -138,13 +146,11 @@ export function DashboardFiveLanguageServices() {
         <FadeIn className="grid grid-cols-1 items-end gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
           <div>
             <h2 className="text-display text-foreground">
-              Language <span className="text-primary">Services</span>
+              {content.heading}{" "}
+              <span className="text-primary">{content.headingHighlight}</span>
             </h2>
           </div>
-          <p className="text-body-lg text-muted-foreground">
-            Across languages, across formats. Translate, transcribe, subtitle
-            and give text a voice, built around the way people communicate.
-          </p>
+          <p className="text-body-lg text-muted-foreground">{content.intro}</p>
         </FadeIn>
 
         <FadeIn
@@ -157,8 +163,8 @@ export function DashboardFiveLanguageServices() {
             style={GRID_BG}
           >
             <div className="flex items-center justify-between text-xs font-semibold text-primary">
-              <span>Language in motion</span>
-              <span>अ → A</span>
+              <span>{content.panelLabel}</span>
+              <span>{content.panelGlyph}</span>
             </div>
             <AnimatePresence mode="wait">
               <motion.div
@@ -173,13 +179,13 @@ export function DashboardFiveLanguageServices() {
           </div>
 
           <div className="border-t border-border">
-            {SERVICE_CHOICES.map((choice) => {
+            {content.choices.map((choice) => {
               const active = selected.id === choice.id;
               return (
                 <div key={choice.id} className="border-b border-border">
                   <button
                     type="button"
-                    onClick={() => setSelected(choice)}
+                    onClick={() => setSelectedId(choice.id)}
                     aria-pressed={active}
                     aria-expanded={active}
                     className={cn(
@@ -258,28 +264,29 @@ export function DashboardFiveLanguageServices() {
           className="mt-10 rounded-2xl border-t-4 border-primary bg-[#e8f1fc] p-6 sm:p-8"
         >
           <span className="mb-5 block text-[0.65rem] font-bold tracking-widest text-primary uppercase">
-            Access language technology
+            {content.access.eyebrow}
           </span>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-0">
             <div className="md:pr-8">
-              <h3 className="text-h3 text-foreground">Choose how you work</h3>
+              <h3 className="text-h3 text-foreground">{content.access.title}</h3>
               <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-                Use the Platform directly or connect language capabilities to
-                your own applications through the API.
+                {content.access.intro}
               </p>
             </div>
             <div className="border-t border-primary/20 pt-6 md:border-t-0 md:border-l md:px-8 md:pt-0">
-              <h4 className="text-h3 text-foreground">Platform</h4>
+              <h4 className="text-h3 text-foreground">
+                {content.access.platformTitle}
+              </h4>
               <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-                Work with Diyo.ai&apos;s language capabilities through the
-                Diyo.ai Platform.
+                {content.access.platformText}
               </p>
             </div>
             <div className="border-t border-primary/20 pt-6 md:border-t-0 md:border-l md:pl-8 md:pt-0">
-              <h4 className="text-h3 text-foreground">API</h4>
+              <h4 className="text-h3 text-foreground">
+                {content.access.apiTitle}
+              </h4>
               <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-                Use Diyo.ai&apos;s language technology programmatically
-                through an API.
+                {content.access.apiText}
               </p>
             </div>
           </div>

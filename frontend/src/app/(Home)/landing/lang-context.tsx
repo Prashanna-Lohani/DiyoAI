@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, type ReactNode } from "react";
 
-import type { Lang } from "./data/shared-content";
+export type Lang = "en" | "np";
 
 type LangContextValue = {
   lang: Lang;

@@ -1,35 +1,20 @@
 import Link from "next/link";
-import {
-  FiArrowUpRight,
-  FiCpu,
-  FiFlag,
-  FiGlobe,
-  FiLayout,
-  FiMessageCircle,
-  FiMessageSquare,
-  FiPhoneCall,
-} from "react-icons/fi";
+import { FiArrowUpRight, FiPhoneCall } from "react-icons/fi";
 
+import type { PageContent } from "@/content";
 import { FadeIn } from "@/components/ui/fade-in";
 import { cn } from "@/lib/utils";
 
 import { ConversationalAIDemo } from "./conversational-ai-demo";
+import { ICONS } from "./icons";
 
-import {
-  AGENT_FLOW,
-  CALL_STORY,
-  CASE_STUDIES,
-  SOLUTIONS_OVERVIEW,
-} from "../data/content";
-
-const AGENT_ICONS = [FiGlobe, FiCpu, FiMessageCircle, FiFlag];
-const SOLUTION_ICONS = [FiMessageSquare, FiCpu, FiLayout, FiPhoneCall];
+type Solutions = PageContent["solutions"];
 
 function CaseStudy({
   study,
   index,
 }: {
-  study: (typeof CASE_STUDIES)[number];
+  study: Solutions["cases"]["items"][number];
   index: number;
 }) {
   return (
@@ -41,7 +26,7 @@ function CaseStudy({
       <p className="mt-3 max-w-xs text-sm text-muted-foreground">
         {study.description}
       </p>
-      {"href" in study && study.href && (
+      {study.href && (
         <Link
           href={study.href}
           target="_blank"
@@ -57,7 +42,12 @@ function CaseStudy({
   );
 }
 
-export function DashboardFiveLanguageSolutions() {
+export function DashboardFiveLanguageSolutions({
+  content,
+}: {
+  content: Solutions;
+}) {
+  const { conversational, agents, calling, cases } = content;
   return (
     <section
       id="language-solutions"
@@ -68,24 +58,23 @@ export function DashboardFiveLanguageSolutions() {
         <FadeIn className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
           <div>
             <span className="mb-6 block text-xs font-bold tracking-widest text-primary uppercase">
-              AI for real world interaction
+              {content.eyebrow}
             </span>
             <h2 id="language-solutions-heading" className="text-display text-foreground">
-              Language Solutions
+              {content.heading}
             </h2>
             <p className="mt-3 text-h3 font-semibold text-primary">
-              Diyo Solutions and Products
+              {content.subheading}
             </p>
             <p className="mt-5 max-w-xl text-body-lg text-muted-foreground">
-              Language, speech and organizational knowledge come together in
-              localized conversations, agents and calling experiences.
+              {content.intro}
             </p>
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {SOLUTIONS_OVERVIEW.map((item, i) => {
-              const Icon = SOLUTION_ICONS[i] ?? FiMessageSquare;
+            {content.overview.map((item, i) => {
+              const Icon = ICONS[item.icon] ?? ICONS.message;
               return (
-                <FadeIn key={item.title} delay={0.1 + i * 0.1} direction="right">
+                <FadeIn key={`${item.title}-${i}`} delay={0.1 + i * 0.1} direction="right">
                   <a
                     href={item.href}
                     className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-[#e8f1fc] hover:shadow-md"
@@ -125,16 +114,14 @@ export function DashboardFiveLanguageSolutions() {
         >
           <div>
             <span className="mb-4 block text-xs font-bold tracking-widest text-primary uppercase">
-              Text &amp; voice
+              {conversational.eyebrow}
             </span>
-            <h3 className="text-h1 text-foreground">Conversational AI</h3>
+            <h3 className="text-h1 text-foreground">{conversational.heading}</h3>
             <p className="mt-4 max-w-sm text-body-lg text-muted-foreground">
-              Help people ask questions and access information in the
-              languages they use. Chatbots and voice bots are two ways into
-              the same conversation.
+              {conversational.text}
             </p>
           </div>
-          <ConversationalAIDemo />
+          <ConversationalAIDemo content={conversational} />
         </FadeIn>
         </div>
 
@@ -145,43 +132,41 @@ export function DashboardFiveLanguageSolutions() {
         >
           <div>
             <span className="mb-4 block text-xs font-bold tracking-widest text-primary uppercase">
-              Your knowledge in conversation
+              {agents.eyebrow}
             </span>
-            <h3 className="text-h1 text-foreground">AI Agents</h3>
+            <h3 className="text-h1 text-foreground">{agents.heading}</h3>
             <p className="mt-4 text-sm font-semibold text-primary">
-              Build with Diyo Agent Studio
+              {agents.subheading}
             </p>
             <p className="mt-3 max-w-md text-body-lg text-muted-foreground">
-              Create a website assistant using your website, documents and
-              FAQs. Answer questions around the clock, capture leads and hand
-              conversations to your team when needed.
+              {agents.text}
             </p>
             <Link
-              href="https://agentstudio.diyo.ai/"
+              href={agents.cta.href}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/85"
             >
-              Explore Diyo Agent Studio
+              {agents.cta.label}
               <span aria-hidden="true">→</span>
               <span className="sr-only"> (opens in a new tab)</span>
             </Link>
           </div>
           <div>
             <span className="mb-5 block text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-              From your knowledge to a useful interaction
+              {agents.flowLabel}
             </span>
             <ol className="relative flex flex-col gap-3">
               <span
                 aria-hidden="true"
                 className="absolute top-8 bottom-8 left-[1.65rem] w-px bg-primary/25"
               />
-              {AGENT_FLOW.map((step, i) => {
-                const Icon = AGENT_ICONS[i] ?? FiGlobe;
+              {agents.flow.map((step, i) => {
+                const Icon = ICONS[step.icon] ?? ICONS.globe;
                 const chips = step.detail.split(" · ");
                 return (
                   <li
-                    key={step.title}
+                    key={`${step.title}-${i}`}
                     className={cn(
                       "relative flex items-center gap-4 rounded-2xl border p-3.5 transition-transform duration-300 hover:translate-x-1",
                       step.emphasis
@@ -236,16 +221,16 @@ export function DashboardFiveLanguageSolutions() {
         >
           <div>
             <span className="mb-4 block text-xs font-bold tracking-widest text-primary uppercase">
-              Calling &amp; assistance
+              {calling.eyebrow}
             </span>
-            <h3 className="text-h1 text-foreground">AI Calling Assistants</h3>
-            <span className="mt-4 inline-block rounded-full border border-primary/30 bg-white/70 px-3 py-1 text-xs font-medium text-primary">
-              Solution direction
-            </span>
+            <h3 className="text-h1 text-foreground">{calling.heading}</h3>
+            {calling.badge && (
+              <span className="mt-4 inline-block rounded-full border border-primary/30 bg-white/70 px-3 py-1 text-xs font-medium text-primary">
+                {calling.badge}
+              </span>
+            )}
             <p className="mt-4 max-w-sm text-body-lg text-muted-foreground">
-              Exploring structured voice conversations for sharing
-              information, collecting details and following up, with a path
-              to human support.
+              {calling.text}
             </p>
           </div>
           <div className="rounded-2xl border border-primary/15 bg-white p-5 shadow-md">
@@ -259,10 +244,10 @@ export function DashboardFiveLanguageSolutions() {
                 </span>
                 <span>
                   <strong className="block text-sm text-foreground">
-                    A possible service conversation
+                    {calling.cardTitle}
                   </strong>
                   <small className="block text-xs text-muted-foreground">
-                    Structured voice call
+                    {calling.cardSubtitle}
                   </small>
                 </span>
               </span>
@@ -284,8 +269,8 @@ export function DashboardFiveLanguageSolutions() {
                 aria-hidden="true"
                 className="absolute top-4 bottom-4 left-4 w-px bg-primary/20"
               />
-              {CALL_STORY.map((step, i) => (
-                <li key={step} className="relative flex items-center gap-4">
+              {calling.steps.map((step, i) => (
+                <li key={`${step}-${i}`} className="relative flex items-center gap-4">
                   <span
                     aria-hidden="true"
                     className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-primary/30 bg-[#e8f1fc] text-xs font-bold text-primary"
@@ -306,23 +291,20 @@ export function DashboardFiveLanguageSolutions() {
           <FadeIn className="grid grid-cols-1 items-end gap-6 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
             <div>
               <span className="mb-6 block text-xs font-bold tracking-widest text-primary uppercase">
-                Solutions in action
+                {cases.eyebrow}
               </span>
-              <h3 className="text-h1 font-bold! text-foreground">
-                Real human needs
-                <br />
-                Local AI responses
+              <h3 className="text-h1 font-bold! whitespace-pre-line text-foreground">
+                {cases.heading}
               </h3>
             </div>
             <p className="max-w-md text-body-lg text-muted-foreground">
-              From everyday conversations to public services and health
-              information, language makes technology more approachable.
+              {cases.text}
             </p>
           </FadeIn>
 
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
-            {CASE_STUDIES.map((study, i) => (
-              <CaseStudy key={study.id} study={study} index={i} />
+            {cases.items.map((study, i) => (
+              <CaseStudy key={`${study.name}-${i}`} study={study} index={i} />
             ))}
           </div>
         </div>

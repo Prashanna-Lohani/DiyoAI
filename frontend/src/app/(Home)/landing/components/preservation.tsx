@@ -1,8 +1,11 @@
+import type { PageContent } from "@/content";
 import { FadeIn } from "@/components/ui/fade-in";
 
-import { INITIATIVES, PRESERVATION_STAGES } from "../data/shared-content";
-
-export function DashboardFivePreservation() {
+export function DashboardFivePreservation({
+  content,
+}: {
+  content: PageContent["preservation"];
+}) {
   return (
     <section
       id="preservation"
@@ -11,33 +14,33 @@ export function DashboardFivePreservation() {
       <div className="mx-auto max-w-312 px-6 md:px-8 lg:px-12">
         <FadeIn>
           <span className="mb-6 block text-xs font-bold tracking-widest text-primary uppercase">
-            Preserve &amp; develop
+            {content.eyebrow}
           </span>
           <h2 className="max-w-3xl text-display text-foreground">
-            Language <span className="text-primary">Preservation</span>
+            {content.heading}{" "}
+            <span className="text-primary">{content.headingHighlight}</span>
           </h2>
 
           <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-14">
             <p className="text-h3 font-semibold text-foreground">
-              From a spoken word to a living resource
+              {content.leadTitle}
             </p>
             <p className="text-body-lg text-muted-foreground">
-              Documenting languages is the beginning. Collecting, annotating
-              and developing language resources supports their preservation
-              and use in the digital world.
+              {content.leadText}
             </p>
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-4 border-y border-primary/15 py-5 text-sm text-muted-foreground sm:gap-6">
-            <span>Collection</span>
-            <b aria-hidden="true" className="font-normal text-primary">
-              →
-            </b>
-            <span>Annotation</span>
-            <b aria-hidden="true" className="font-normal text-primary">
-              →
-            </b>
-            <span>Revitalization</span>
+            {content.flow.map((step, i) => (
+              <span key={`${step}-${i}`} className="contents">
+                {i > 0 && (
+                  <b aria-hidden="true" className="font-normal text-primary">
+                    →
+                  </b>
+                )}
+                <span>{step}</span>
+              </span>
+            ))}
           </div>
         </FadeIn>
 
@@ -46,9 +49,9 @@ export function DashboardFivePreservation() {
             aria-hidden="true"
             className="absolute top-6 bottom-6 left-6 hidden w-px bg-primary/35 sm:block"
           />
-          {PRESERVATION_STAGES.map((stage, i) => (
+          {content.stages.map((stage, i) => (
             <FadeIn
-              key={stage.no}
+              key={`${stage.no}-${i}`}
               delay={i * 0.08}
               className="grid grid-cols-1 gap-6 sm:grid-cols-[48px_1fr_1fr] sm:gap-9"
             >
@@ -69,7 +72,7 @@ export function DashboardFivePreservation() {
                   {stage.resourceLabel}
                 </span>
 
-                {"tags" in stage && stage.tags ? (
+                {stage.variant === "tags" && stage.tags ? (
                   <>
                     <div className="my-3 w-fit border-b border-dashed border-primary/40 pb-1.5 font-sans text-4xl text-foreground">
                       {stage.word}
@@ -85,7 +88,7 @@ export function DashboardFivePreservation() {
                       ))}
                     </div>
                   </>
-                ) : "orbit" in stage && stage.orbit ? (
+                ) : stage.variant === "orbit" && stage.orbit ? (
                   <div className="mt-3 grid grid-cols-2 items-center gap-3 text-sm text-primary">
                     <span className="row-span-3 border-r border-primary/40 pr-3 font-sans text-4xl text-foreground">
                       {stage.orbit[0]}
@@ -116,21 +119,19 @@ export function DashboardFivePreservation() {
 
         <FadeIn className="mt-16 border-t border-primary/35 pt-11 pl-0 sm:ml-6 sm:pl-15">
           <span className="mb-5 block text-xs font-bold tracking-widest text-primary uppercase">
-            The work continues through our initiatives
+            {content.initiativesEyebrow}
           </span>
           <h3 className="max-w-2xl text-h1 text-foreground">
-            Rooted in language, built for its future
+            {content.initiativesHeading}
           </h3>
           <p className="mt-5 max-w-2xl text-body-lg text-muted-foreground">
-            Our in-house language initiatives, NepSwor and YetiVoices, focus
-            on documenting, preserving and developing resources for regional
-            and Himalayan languages.
+            {content.initiativesText}
           </p>
 
           <div className="mt-11 grid grid-cols-1 gap-8 border-b border-primary/15 pb-8 sm:grid-cols-2">
-            {INITIATIVES.map((initiative, i) => (
+            {content.initiatives.map((initiative, i) => (
               <div
-                key={initiative.name}
+                key={`${initiative.name}-${i}`}
                 className={
                   i > 0 ? "border-t border-primary/15 pt-6 sm:border-t-0 sm:border-l sm:pt-0 sm:pl-10" : ""
                 }
@@ -154,7 +155,7 @@ export function DashboardFivePreservation() {
                   </svg>
                 )}
                 <span className="block text-[0.65rem] tracking-widest text-muted-foreground uppercase">
-                  Language preservation initiative
+                  {content.initiativeLabel}
                 </span>
                 <h4 className="mt-2.5 text-h1 font-bold text-foreground">
                   {initiative.name}
@@ -164,8 +165,7 @@ export function DashboardFivePreservation() {
           </div>
 
           <p className="mt-6 text-xs text-muted-foreground">
-            Documenting voices · Structuring knowledge · Developing language
-            resources
+            {content.initiativesFootnote}
           </p>
         </FadeIn>
       </div>

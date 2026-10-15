@@ -2,30 +2,15 @@
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import type { IconType } from "react-icons";
-import {
-  FiCpu,
-  FiFileText,
-  FiMessageSquare,
-  FiMic,
-  FiVolume2,
-} from "react-icons/fi";
+import { FiMic } from "react-icons/fi";
 
-import TemplesImage from "@/assets/images/Temples.png";
+import type { Hero } from "@/content";
 import { FadeIn } from "@/components/ui/fade-in";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-import { HERO_COPY, VOICE_STEPS } from "../data/shared-content";
 import { useDashboardFiveLang } from "../lang-context";
-
-const STEP_ICONS: Record<(typeof VOICE_STEPS)[number]["icon"], IconType> = {
-  mic: FiMic,
-  transcribe: FiFileText,
-  brain: FiCpu,
-  response: FiMessageSquare,
-  voice: FiVolume2,
-};
+import { ICONS } from "./icons";
 
 function Waveform() {
   return (
@@ -55,12 +40,11 @@ const RISE = {
   },
 };
 
-export function DashboardFiveHero() {
+export function DashboardFiveHero({ content }: { content: Hero }) {
   const { scrollY } = useScroll();
   const templesY = useTransform(scrollY, [0, 700], [0, 70]);
   const { lang } = useDashboardFiveLang();
-  const copy = HERO_COPY[lang];
-  const activeStep = 3;
+  const activeStep = content.highlightedStep - 1;
 
   return (
     <section
@@ -76,7 +60,7 @@ export function DashboardFiveHero() {
         className='pointer-events-none absolute inset-x-0 bottom-0'
       >
         <Image
-          src={TemplesImage}
+          src={content.backgroundImage}
           alt=''
           priority
           className='h-44 w-full object-cover object-bottom select-none sm:h-64 lg:h-auto'
@@ -98,7 +82,7 @@ export function DashboardFiveHero() {
               animate={{ scale: [1, 1.4, 1], opacity: [1, 0.6, 1] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             />
-            Speech &amp; Language AI for Nepal
+            {content.badge}
           </motion.span>
           <motion.h1
             variants={RISE}
@@ -107,18 +91,19 @@ export function DashboardFiveHero() {
           >
             {lang === "en" ? (
               <>
-                AI that understands your{" "}
-                <span className='text-primary'>Language</span>.
+                {content.headingPrefix}{" "}
+                <span className='text-primary'>{content.headingHighlight}</span>
+                {content.headingSuffix}
               </>
             ) : (
-              copy.heading
+              content.headingNp
             )}
           </motion.h1>
           <motion.p
             variants={RISE}
             className='max-w-lg text-body-lg text-muted-foreground'
           >
-            {copy.sub}
+            {lang === "en" ? content.subEn : content.subNp}
           </motion.p>
           <motion.div
             variants={RISE}
@@ -127,17 +112,17 @@ export function DashboardFiveHero() {
             <Button
               size='lg'
               className='rounded-lg px-8 transition-transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30'
-              render={<a href='#services' />}
+              render={<a href={content.primaryCta.href} />}
             >
-              Explore Solutions
+              {content.primaryCta.label}
             </Button>
             <Button
               size='lg'
               variant='outline'
               className='rounded-lg bg-white px-8 transition-transform hover:-translate-y-0.5'
-              render={<a href='#demo' />}
+              render={<a href={content.secondaryCta.href} />}
             >
-              Talk to Diyo
+              {content.secondaryCta.label}
             </Button>
           </motion.div>
         </motion.div>
@@ -157,16 +142,16 @@ export function DashboardFiveHero() {
                     aria-hidden='true'
                     className='mr-1.5 inline-block size-4 align-[-3px]'
                   />
-                  Try Voice AI: Nepali
+                  {content.demoTitle}
                 </h2>
                 <span className='h-2.5 w-2.5 shrink-0 rounded-full bg-primary' />
               </div>
               <div className='flex flex-col gap-2'>
-                {VOICE_STEPS.map((step, i) => {
-                  const Icon = STEP_ICONS[step.icon];
+                {content.voiceSteps.map((step, i) => {
+                  const Icon = ICONS[step.icon] ?? ICONS.message;
                   return (
                     <div
-                      key={step.label}
+                      key={`${step.label}-${i}`}
                       className={cn(
                         "flex items-center gap-3 rounded-xl border border-border px-3.5 py-3 transition-colors duration-300",
                         i === activeStep && "border-primary/35 bg-primary/10",

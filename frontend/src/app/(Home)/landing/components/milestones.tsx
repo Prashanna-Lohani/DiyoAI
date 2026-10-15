@@ -5,8 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 import { FadeIn } from "@/components/ui/fade-in";
+import type { PageContent } from "@/content";
 import { cn } from "@/lib/utils";
-import { MILESTONES } from "@/utils/constants";
+
+type Milestones = PageContent["milestones"];
 
 const CARD_TONES = [
   "bg-blue-50 text-blue-700",
@@ -69,7 +71,7 @@ function StatCard({
   inView,
   index,
 }: {
-  milestone: (typeof MILESTONES)[number];
+  milestone: Milestones["items"][number];
   tone: string;
   inView: boolean;
   index: number;
@@ -96,23 +98,26 @@ function StatCard({
   );
 }
 
-export function DashboardFiveMilestones() {
+export function DashboardFiveMilestones({
+  content,
+}: {
+  content: Milestones;
+}) {
   const { ref, inView } = useInView<HTMLElement>();
 
   return (
     <section ref={ref} id="milestones" className="bg-background py-16 lg:py-24">
       <FadeIn className="mx-auto max-w-312 px-6 text-center md:px-8 lg:px-12">
         <h2 className="text-h1 text-foreground">
-          Diyo&apos;s Milestones at a Glance
+          {content.heading}
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-body-lg text-muted-foreground">
-          Our achievements and growth metrics showcase our impact in the AI and
-          language technology landscape.
+          {content.description}
         </p>
         <div className="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-          {MILESTONES.map((milestone, i) => (
+          {content.items.map((milestone, i) => (
             <StatCard
-              key={milestone.label}
+              key={`${milestone.label}-${i}`}
               milestone={milestone}
               tone={CARD_TONES[i % CARD_TONES.length]}
               inView={inView}
