@@ -3,5 +3,10 @@
   command = "pnpm run build"
   publish = ".next"
 
+[build.environment]
+  # Public, non-secret values (the dataset name is just "production", which
+  # appears throughout Next.js itself). Real secrets stay scanned.
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_SANITY_DATASET,NEXT_PUBLIC_SANITY_PROJECT_ID"
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
